@@ -18,5 +18,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           source: "./"
-          target: "/public_html"
+          target: "/home/u2602314/public_html"
           exclude: ".git,.github,node_modules"
