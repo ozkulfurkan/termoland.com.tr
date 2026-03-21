@@ -9,12 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Dosyaları FTP ile yükle
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ftp.termoland.com.tr
           username: u2626782@termoland.com.tr
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/
+          dangerous-clean-slate: true
