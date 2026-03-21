@@ -1,0 +1,280 @@
+/* ============================================================
+   TERMOLAND – Animations
+   ============================================================ */
+
+/* ---- Keyframes -------------------------------------------- */
+
+@keyframes heroLogoIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes scrollWheel {
+  0%   { transform: translateY(0);   opacity: 1; }
+  60%  { transform: translateY(14px); opacity: 0; }
+  61%  { transform: translateY(0);   opacity: 0; }
+  100% { transform: translateY(0);   opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes floatX {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(12px); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-15deg) scale(.85); }
+  to   { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(107,0,0,.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(107,0,0,.0); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(107,0,0,.18); box-shadow: 0 2px 12px rgba(107,0,0,.06); }
+  50%       { border-color: rgba(107,0,0,.45); box-shadow: 0 4px 24px rgba(107,0,0,.18); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(.6) translateY(10px); }
+  70%  { transform: scale(1.06) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: .6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: .8; }
+  100% { transform: scale(2.5); opacity: 0;  }
+}
+
+/* ---- Hero logo float + glow -------------------------------- */
+.hero-logo-wrap {
+  animation:
+    heroLogoIn 1s cubic-bezier(.16,1,.3,1) both,
+    floatY 4s 1.2s ease-in-out infinite;
+}
+
+/* ---- Stat card border pulse -------------------------------- */
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(107,0,0,.18); }
+  50%       { border-color: rgba(107,0,0,.5);  }
+}
+.stat-card { animation: borderPulse 3s ease-in-out infinite; }
+.stat-card:nth-child(2) { animation-delay: .75s;  }
+.stat-card:nth-child(3) { animation-delay: 1.5s;  }
+.stat-card:nth-child(4) { animation-delay: 2.25s; }
+
+/* ---- Why card entrance ----------------------------------- */
+.why-card.visible {
+  animation: fadeSlideUp .6s both;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ---- Product card entrance ------------------------------- */
+/* NOTE: Must use fadeSlideUp (not popIn/scale) here.
+   popIn applies transform:scale to .product-card which has perspective:1000px,
+   and a non-none transform on a perspective container breaks 3D child flips. */
+.product-card.visible {
+  animation: fadeSlideUp .6s both;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ---- Nav link underline slide ---------------------------- */
+.nav-links a {
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 14px; right: 14px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+/* ---- Country chip hover pop ------------------------------ */
+.country-chip {
+  transition: transform .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.country-chip:hover { transform: translateY(-3px) scale(1.02); }
+
+/* ---- Country chip staggered reveal ----------------------- */
+.country-chip { opacity: 0; animation: popIn .5s both; }
+.country-chip:nth-child(1)  { animation-delay: .05s; }
+.country-chip:nth-child(2)  { animation-delay: .1s;  }
+.country-chip:nth-child(3)  { animation-delay: .15s; }
+.country-chip:nth-child(4)  { animation-delay: .2s;  }
+.country-chip:nth-child(5)  { animation-delay: .25s; }
+.country-chip:nth-child(6)  { animation-delay: .3s;  }
+.country-chip:nth-child(7)  { animation-delay: .35s; }
+.country-chip:nth-child(8)  { animation-delay: .4s;  }
+.country-chip:nth-child(9)  { animation-delay: .45s; }
+.country-chip:nth-child(10) { animation-delay: .5s;  }
+.country-chip:nth-child(11) { animation-delay: .55s; }
+.country-chip:nth-child(12) { animation-delay: .6s;  }
+.country-chip:nth-child(13) { animation-delay: .65s; }
+.country-chip:nth-child(14) { animation-delay: .7s;  }
+.country-chip:nth-child(15) { animation-delay: .75s; }
+.country-chip:nth-child(16) { animation-delay: .8s;  }
+
+/* ---- Section tag entrance -------------------------------- */
+.section-tag {
+  animation: scaleIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+
+/* ---- Scroll-triggered stagger for why cards -------------- */
+.why-card:nth-child(1) { --delay: .1s; }
+.why-card:nth-child(2) { --delay: .2s; }
+.why-card:nth-child(3) { --delay: .3s; }
+.why-card:nth-child(4) { --delay: .4s; }
+
+.product-card:nth-child(1) { --delay: .1s; }
+.product-card:nth-child(2) { --delay: .2s; }
+.product-card:nth-child(3) { --delay: .3s; }
+
+/* ---- Why icon continuous float --------------------------- */
+.why-card:nth-child(1) .why-icon { animation: floatY 3s .0s ease-in-out infinite; }
+.why-card:nth-child(2) .why-icon { animation: floatY 3s .7s ease-in-out infinite; }
+.why-card:nth-child(3) .why-icon { animation: floatY 3s 1.4s ease-in-out infinite; }
+.why-card:nth-child(4) .why-icon { animation: floatY 3s 2.1s ease-in-out infinite; }
+/* Override hover on individual icon */
+.why-card:hover .why-icon { animation: none; }
+
+/* ---- Card icon subtle float on front --------------------- */
+.card-icon { animation: floatY 4s ease-in-out infinite; }
+.product-card:nth-child(2) .card-icon { animation-delay: 1.3s; }
+.product-card:nth-child(3) .card-icon { animation-delay: 2.6s; }
+
+/* ---- Form focus ring ------------------------------------- */
+.form-group input,
+.form-group textarea {
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+/* ---- Submit button success flash ------------------------- */
+@keyframes successFlash {
+  0%   { background: var(--bordo); }
+  50%  { background: #006600; }
+  100% { background: var(--bordo); }
+}
+.btn-primary.success { animation: successFlash .5s ease; }
+
+/* ---- Info icon hover ------------------------------------ */
+.info-icon {
+  transition: background .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.info-item:hover .info-icon { transform: scale(1.1) rotate(-5deg); }
+
+/* ---- Export container float ------------------------------ */
+.export-container-wrap svg { animation: floatY 5s ease-in-out infinite; }
+
+/* ---- Cdot pulse ----------------------------------------- */
+.cdot {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+.country-chip:nth-child(odd) .cdot { animation-delay: 1s; }
+
+/* ---- Hero decorative elements ---------------------------- */
+.hero-decor      { animation: floatY 6s ease-in-out infinite; }
+.hero-decor-left { animation: floatY 8s 2s ease-in-out infinite; }
+
+/* ---- Gradient border on map wrapper ---------------------- */
+.map-wrapper {
+  transition: box-shadow .3s ease;
+}
+.map-wrapper:hover {
+  box-shadow: 0 8px 40px rgba(107,0,0,.15);
+}
+
+/* ---- About section top line animation ------------------- */
+#about::before {
+  animation: shimmer 3s ease-in-out infinite;
+  background-size: 400px 100%;
+}
+
+/* ---- Forklift decoration fade in ------------------------ */
+.why-forklift {
+  animation: fadeIn 2s 1s both;
+}

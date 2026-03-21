@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Termoland – Dış Ticaret | Global Thermoplastic Solutions</title>
+  <meta name="description"
+    content="Termoland – TPU, TPR ve TR Light termoplastik ürünlerde 16 ülkeye ihracat. Quality Without Borders." />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-bg">
+          <img src="assets/logo.png" alt="Termoland" />
+        </div>
+        <span class="nav-brand">TERMOLAND</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a></li>
+        <li><a href="#about" data-tr="Hakkımızda" data-en="About">Hakkımızda</a></li>
+        <li><a href="#products" data-tr="Ürünler" data-en="Products">Ürünler</a></li>
+        <li><a href="#export" data-tr="İhracat" data-en="Export">İhracat</a></li>
+        <li><a href="#contact" data-tr="İletişim" data-en="Contact">İletişim</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="lang-toggle" id="langToggle" aria-label="Dil değiştir">
+          <span id="langTR" class="lang-active">TR</span>
+          <span class="lang-sep">|</span>
+          <span id="langEN">EN</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menü">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#hero" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a></li>
+        <li><a href="#about" data-tr="Hakkımızda" data-en="About">Hakkımızda</a></li>
+        <li><a href="#products" data-tr="Ürünler" data-en="Products">Ürünler</a></li>
+        <li><a href="#export" data-tr="İhracat" data-en="Export">İhracat</a></li>
+        <li><a href="#contact" data-tr="İletişim" data-en="Contact">İletişim</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-logo-wrap">
+        <img src="assets/logo.png" alt="Termoland Logo" class="hero-logo" id="heroLogo" />
+      </div>
+      <h1 class="hero-brand-text">TERMOLAND</h1>
+      <div class="hero-tagline">
+        <span id="typewriter" class="typewriter-text"></span><span class="typewriter-cursor">|</span>
+      </div>
+      <p class="hero-sub" data-tr="16 Ülkeye İhracat &nbsp;·&nbsp; Termoplastik Çözümler"
+        data-en="Exporting to 16 Countries &nbsp;·&nbsp; Thermoplastic Solutions">
+        16 Ülkeye İhracat &nbsp;·&nbsp; Termoplastik Çözümler
+      </p>
+      <div class="hero-cta">
+        <a href="#products" class="btn-primary" data-tr="Ürünleri Keşfet" data-en="Explore Products">Ürünleri Keşfet</a>
+        <a href="#contact" class="btn-outline" data-tr="İletişime Geç" data-en="Contact Us">İletişime Geç</a>
+      </div>
+    </div>
+    <!-- Decorative containers -->
+    <div class="hero-decor" aria-hidden="true">
+      <svg viewBox="0 0 480 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Large container -->
+        <rect x="10" y="40" width="420" height="130" rx="6" stroke="currentColor" stroke-width="3" fill="currentColor"
+          fill-opacity=".06" />
+        <rect x="10" y="30" width="420" height="18" rx="4" fill="currentColor" fill-opacity=".15" stroke="currentColor"
+          stroke-width="2" />
+        <rect x="10" y="152" width="420" height="18" rx="4" fill="currentColor" fill-opacity=".15" stroke="currentColor"
+          stroke-width="2" />
+        <!-- Corner castings -->
+        <rect x="10" y="28" width="32" height="22" rx="3" fill="currentColor" fill-opacity=".3" stroke="currentColor"
+          stroke-width="1.5" />
+        <rect x="398" y="28" width="32" height="22" rx="3" fill="currentColor" fill-opacity=".3" stroke="currentColor"
+          stroke-width="1.5" />
+        <rect x="10" y="150" width="32" height="22" rx="3" fill="currentColor" fill-opacity=".3" stroke="currentColor"
+          stroke-width="1.5" />
+        <rect x="398" y="150" width="32" height="22" rx="3" fill="currentColor" fill-opacity=".3" stroke="currentColor"
+          stroke-width="1.5" />
+        <!-- Vertical ribs -->
+        <line x1="80" y1="30" x2="80" y2="170" stroke="currentColor" stroke-width="2" opacity=".5" />
+        <line x1="150" y1="30" x2="150" y2="170" stroke="currentColor" stroke-width="2" opacity=".5" />
+        <line x1="220" y1="30" x2="220" y2="170" stroke="currentColor" stroke-width="2" opacity=".5" />
+        <line x1="290" y1="30" x2="290" y2="170" stroke="currentColor" stroke-width="2" opacity=".5" />
+        <line x1="360" y1="30" x2="360" y2="170" stroke="currentColor" stroke-width="2" opacity=".5" />
+        <!-- Door right -->
+        <line x1="398" y1="30" x2="398" y2="170" stroke="currentColor" stroke-width="3" opacity=".8" />
+        <circle cx="418" cy="100" r="6" stroke="currentColor" stroke-width="2" fill="none" />
+      </svg>
+    </div>
+
+    <div class="hero-decor-left" aria-hidden="true">
+      <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Forklift body -->
+        <rect x="80" y="90" width="120" height="75" rx="6" stroke="currentColor" stroke-width="2.5" fill="currentColor"
+          fill-opacity=".08" />
+        <!-- Cabin -->
+        <rect x="90" y="45" width="75" height="50" rx="4" stroke="currentColor" stroke-width="2" fill="currentColor"
+          fill-opacity=".12" />
+        <!-- Windshield -->
+        <rect x="98" y="52" width="55" height="30" rx="2" stroke="currentColor" stroke-width="1.5" fill="currentColor"
+          fill-opacity=".06" />
+        <!-- Mast -->
+        <rect x="200" y="20" width="10" height="145" rx="2" stroke="currentColor" stroke-width="2" fill="currentColor"
+          fill-opacity=".1" />
+        <!-- Forks -->
+        <rect x="208" y="100" width="70" height="10" rx="3" fill="currentColor" fill-opacity=".3" stroke="currentColor"
+          stroke-width="1.5" />
+        <rect x="208" y="118" width="70" height="10" rx="3" fill="currentColor" fill-opacity=".3" stroke="currentColor"
+          stroke-width="1.5" />
+        <!-- Wheels -->
+        <circle cx="110" cy="165" r="22" stroke="currentColor" stroke-width="2.5" fill="none" />
+        <circle cx="110" cy="165" r="8" fill="currentColor" fill-opacity=".3" />
+        <circle cx="170" cy="165" r="22" stroke="currentColor" stroke-width="2.5" fill="none" />
+        <circle cx="170" cy="165" r="8" fill="currentColor" fill-opacity=".3" />
+        <!-- Counterweight -->
+        <rect x="58" y="110" width="28" height="55" rx="4" stroke="currentColor" stroke-width="2" fill="currentColor"
+          fill-opacity=".15" />
+        <!-- Operator -->
+        <circle cx="130" cy="65" r="12" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity=".15" />
+      </svg>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span data-tr="Aşağı kaydır" data-en="Scroll down">Aşağı kaydır</span>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <span class="section-tag" data-tr="Hakkımızda" data-en="About Us">Hakkımızda</span>
+          <h2 data-tr="Küresel Pazarda<br>Termoplastik Güç" data-en="Thermoplastic Power<br>in Global Markets">Küresel
+            Pazarda<br>Termoplastik Güç</h2>
+          <p data-tr="Termoland, Özkul Termoplastik'in uluslararası dış ticaret markasıdır. Kalite, sürdürülebilirlik ve zamanında teslimat ilkeleriyle TPU, TPR ve TR Light ürünlerimizi dünya pazarlarına taşıyoruz."
+            data-en="Termoland is the international trade brand of Özkul Termoplastik. We bring our TPU, TPR and TR Light products to world markets with principles of quality, sustainability and timely delivery.">
+            Termoland, Özkul Termoplastik'in uluslararası dış ticaret markasıdır. Kalite, sürdürülebilirlik ve zamanında
+            teslimat ilkeleriyle TPU, TPR ve TR Light ürünlerimizi dünya pazarlarına taşıyoruz.
+          </p>
+          <p data-tr="İstanbul merkezli operasyonumuz ile tedarikten üretime, kalite kontrolden lojistiğe kadar tüm süreçleri entegre biçimde yönetiyoruz."
+            data-en="With our Istanbul-based operations, we manage all processes from supply to production, quality control to logistics in an integrated manner.">
+            İstanbul merkezli operasyonumuz ile tedarikten üretime, kalite kontrolden lojistiğe kadar tüm süreçleri
+            entegre biçimde yönetiyoruz.
+          </p>
+        </div>
+        <div class="about-stats reveal-right">
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-number" data-target="16">0</span><span class="stat-suffix">+</span>
+            </div>
+            <p class="stat-label" data-tr="Ülkeye İhracat" data-en="Countries Exported">Ülkeye İhracat</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-number" data-target="3">0</span>
+            </div>
+            <p class="stat-label" data-tr="Ürün Ailesi" data-en="Product Families">Ürün Ailesi</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-number" data-target="25">0</span><span class="stat-suffix">+</span>
+            </div>
+            <p class="stat-label" data-tr="Yıl Deneyim" data-en="Years Experience">Yıl Deneyim</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">
+              <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+            </div>
+            <p class="stat-label" data-tr="Kalite Odaklı" data-en="Quality Focused">Kalite Odaklı</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTS ===== -->
+  <section id="products">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag" data-tr="Ürünlerimiz" data-en="Our Products">Ürünlerimiz</span>
+        <h2 data-tr="Premium Termoplastik Çözümler" data-en="Premium Thermoplastic Solutions">Premium Termoplastik
+          Çözümler</h2>
+        <p data-tr="Dünya standartlarında üretilen TPU, TPR ve TR Light ürünlerimiz ile sektörünüze değer katıyoruz."
+          data-en="We add value to your industry with our TPU, TPR and TR Light products manufactured to world standards.">
+          Dünya standartlarında üretilen TPU, TPR ve TR Light ürünlerimiz ile sektörünüze değer katıyoruz.
+        </p>
+      </div>
+      <div class="products-grid">
+
+        <!-- TPU -->
+        <div class="product-card reveal-up" style="--delay:.1s">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="32" cy="32" r="26" stroke="currentColor" stroke-width="2.5" />
+                  <path d="M32 18 C24 18 18 24 18 32 C18 40 24 46 32 46 C40 46 46 40 46 32" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="32" cy="32" r="6" fill="currentColor" fill-opacity=".25" />
+                  <path d="M32 8 L32 16 M56 32 L48 32 M44 12 L38 18" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" />
+                </svg>
+              </div>
+              <h3>TPU</h3>
+              <p class="card-type" data-tr="Termoplastik Poliüretan" data-en="Thermoplastic Polyurethane">Termoplastik
+                Poliüretan</p>
+              <div class="card-flip-hint">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3>TPU</h3>
+              <p data-tr="Yüksek elastikiyet ve dayanıklılık gerektiren uygulamalar için ideal termoplastik malzeme."
+                data-en="Ideal thermoplastic material for applications requiring high elasticity and durability.">
+                Yüksek elastikiyet ve dayanıklılık gerektiren uygulamalar için ideal termoplastik malzeme.
+              </p>
+              <ul>
+                <li data-tr="Ayakkabı sektörü" data-en="Footwear industry">Ayakkabı sektörü</li>
+                <li data-tr="Otomotiv parçaları" data-en="Automotive parts">Otomotiv parçaları</li>
+                <li data-tr="Medikal uygulamalar" data-en="Medical applications">Medikal uygulamalar</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TPR -->
+        <div class="product-card reveal-up" style="--delay:.2s">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="10" y="10" width="44" height="44" rx="10" stroke="currentColor" stroke-width="2.5" />
+                  <path d="M20 32 L32 20 L44 32 L32 44 Z" fill="currentColor" fill-opacity=".25" stroke="currentColor"
+                    stroke-width="2.5" stroke-linejoin="round" />
+                  <circle cx="32" cy="32" r="4" fill="currentColor" />
+                </svg>
+              </div>
+              <h3>TPR</h3>
+              <p class="card-type" data-tr="Termoplastik Kauçuk" data-en="Thermoplastic Rubber">Termoplastik Kauçuk</p>
+              <div class="card-flip-hint">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3>TPR</h3>
+              <p data-tr="Çevre dostu yapısı ve üstün performansıyla ayakkabı ve tüketim ürünleri için tercih edilen malzeme."
+                data-en="Preferred material for footwear and consumer products with eco-friendly structure and superior performance.">
+                Çevre dostu yapısı ve üstün performansıyla ayakkabı ve tüketim ürünleri için tercih edilen malzeme.
+              </p>
+              <ul>
+                <li data-tr="Ayakkabı tabanları" data-en="Shoe soles">Ayakkabı tabanları</li>
+                <li data-tr="Tüketim ürünleri" data-en="Consumer products">Tüketim ürünleri</li>
+                <li data-tr="Çevre dostu seçenek" data-en="Eco-friendly option">Çevre dostu seçenek</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TR Light -->
+        <div class="product-card reveal-up" style="--delay:.3s">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32 10 L54 50 H10 Z" stroke="currentColor" stroke-width="2.5" fill="currentColor"
+                    fill-opacity=".15" stroke-linejoin="round" />
+                  <circle cx="32" cy="32" r="5" fill="currentColor" />
+                  <line x1="32" y1="4" x2="32" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  <line x1="52" y1="14" x2="45" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  <line x1="58" y1="38" x2="49" y2="35" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+              <h3>TR Light</h3>
+              <p class="card-type" data-tr="Hafif Taban Malzemesi" data-en="Lightweight Sole Material">Hafif Taban
+                Malzemesi</p>
+              <div class="card-flip-hint">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="card-back">
+              <h3>TR Light</h3>
+              <p data-tr="Hafif yapısıyla konfor ve performansı bir arada sunan özelleşmiş ayakkabı taban malzemesi."
+                data-en="Specialized shoe sole material combining comfort and performance with its ultra-light structure.">
+                Hafif yapısıyla konfor ve performansı bir arada sunan özelleşmiş ayakkabı taban malzemesi.
+              </p>
+              <ul>
+                <li data-tr="Ultra hafif yapı" data-en="Ultra-light structure">Ultra hafif yapı</li>
+                <li data-tr="Yüksek konfor" data-en="High comfort">Yüksek konfor</li>
+                <li data-tr="Spor & günlük ayakkabı" data-en="Sports & casual shoes">Spor &amp; günlük ayakkabı</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPORT MAP ===== -->
+  <section id="export">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag" data-tr="Global Erişim" data-en="Global Reach">Global Erişim</span>
+        <h2 data-tr="16 Ülkeye Ulaşan Güç" data-en="Reaching Power to 16 Countries">16 Ülkeye Ulaşan Güç</h2>
+        <p data-tr="İstanbul'dan dünyaya uzanan ihracat ağımız ile kaliteli termoplastik ürünleri küresel pazarlara taşıyoruz."
+          data-en="We carry quality thermoplastic products to global markets with our export network stretching from Istanbul to the world.">
+          İstanbul'dan dünyaya uzanan ihracat ağımız ile kaliteli termoplastik ürünleri küresel pazarlara taşıyoruz.
+        </p>
+      </div>
+      <!-- Container visual strip -->
+      <div class="export-visual reveal-up">
+        <div class="export-container-wrap">
+          <svg viewBox="0 0 360 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="20" width="344" height="92" rx="5" stroke="currentColor" stroke-width="2.5"
+              fill="currentColor" fill-opacity=".07" />
+            <rect x="8" y="12" width="344" height="14" rx="4" fill="currentColor" fill-opacity=".18"
+              stroke="currentColor" stroke-width="2" />
+            <rect x="8" y="106" width="344" height="14" rx="4" fill="currentColor" fill-opacity=".18"
+              stroke="currentColor" stroke-width="2" />
+            <!-- Corner castings -->
+            <rect x="8" y="10" width="24" height="16" rx="2" fill="currentColor" fill-opacity=".4" stroke="currentColor"
+              stroke-width="1.5" />
+            <rect x="328" y="10" width="24" height="16" rx="2" fill="currentColor" fill-opacity=".4"
+              stroke="currentColor" stroke-width="1.5" />
+            <rect x="8" y="104" width="24" height="16" rx="2" fill="currentColor" fill-opacity=".4"
+              stroke="currentColor" stroke-width="1.5" />
+            <rect x="328" y="104" width="24" height="16" rx="2" fill="currentColor" fill-opacity=".4"
+              stroke="currentColor" stroke-width="1.5" />
+            <!-- Ribs -->
+            <line x1="68" y1="12" x2="68" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".45" />
+            <line x1="128" y1="12" x2="128" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".45" />
+            <line x1="188" y1="12" x2="188" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".45" />
+            <line x1="248" y1="12" x2="248" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".45" />
+            <line x1="308" y1="12" x2="308" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".45" />
+            <!-- Door handle -->
+            <circle cx="342" cy="66" r="5" stroke="currentColor" stroke-width="2" fill="none" />
+            <!-- TERMOLAND label area -->
+            <rect x="75" y="52" width="180" height="28" rx="3" fill="currentColor" fill-opacity=".08"
+              stroke="currentColor" stroke-width="1" opacity=".4" />
+          </svg>
+        </div>
+        <div class="export-container-wrap">
+          <svg viewBox="0 0 240 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="20" width="228" height="92" rx="5" stroke="currentColor" stroke-width="2.5"
+              fill="currentColor" fill-opacity=".07" />
+            <rect x="6" y="12" width="228" height="14" rx="4" fill="currentColor" fill-opacity=".18"
+              stroke="currentColor" stroke-width="2" />
+            <rect x="6" y="106" width="228" height="14" rx="4" fill="currentColor" fill-opacity=".18"
+              stroke="currentColor" stroke-width="2" />
+            <rect x="6" y="10" width="22" height="16" rx="2" fill="currentColor" fill-opacity=".4" stroke="currentColor"
+              stroke-width="1.5" />
+            <rect x="212" y="10" width="22" height="16" rx="2" fill="currentColor" fill-opacity=".4"
+              stroke="currentColor" stroke-width="1.5" />
+            <rect x="6" y="104" width="22" height="16" rx="2" fill="currentColor" fill-opacity=".4"
+              stroke="currentColor" stroke-width="1.5" />
+            <rect x="212" y="104" width="22" height="16" rx="2" fill="currentColor" fill-opacity=".4"
+              stroke="currentColor" stroke-width="1.5" />
+            <line x1="56" y1="12" x2="56" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".4" />
+            <line x1="106" y1="12" x2="106" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".4" />
+            <line x1="156" y1="12" x2="156" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".4" />
+            <line x1="200" y1="12" x2="200" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".4" />
+            <circle cx="224" cy="66" r="4" stroke="currentColor" stroke-width="2" fill="none" />
+          </svg>
+        </div>
+        <div class="export-visual-label" data-tr="İhracat Konteynerleri" data-en="Export Containers">İhracat
+          Konteynerleri</div>
+      </div>
+
+      <div class="map-wrapper reveal-up">
+        <canvas id="worldMap"></canvas>
+      </div>
+      <div class="countries-grid reveal-up">
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Tunus" data-en="Tunisia">Tunus</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Fas" data-en="Morocco">Fas</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Cezayir" data-en="Algeria">Cezayir</span>
+        </div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Mısır" data-en="Egypt">Mısır</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Libya" data-en="Libya">Libya</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Lübnan" data-en="Lebanon">Lübnan</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Suriye" data-en="Syria">Suriye</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Ermenistan"
+            data-en="Armenia">Ermenistan</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Azerbaycan"
+            data-en="Azerbaijan">Azerbaycan</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Rusya" data-en="Russia">Rusya</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Ukrayna" data-en="Ukraine">Ukrayna</span>
+        </div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Özbekistan"
+            data-en="Uzbekistan">Özbekistan</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Sırbistan" data-en="Serbia">Sırbistan</span>
+        </div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Bosna Hersek"
+            data-en="Bosnia Herzegovina">Bosna Hersek</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="Arnavutluk"
+            data-en="Albania">Arnavutluk</span></div>
+        <div class="country-chip"><span class="cdot"></span><span data-tr="K. Makedonya" data-en="N. Macedonia">K.
+            Makedonya</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY US ===== -->
+  <section id="why" class="dark-section">
+    <!-- Forklift decoration -->
+    <div class="why-forklift" aria-hidden="true">
+      <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Body -->
+        <rect x="100" y="130" width="180" height="110" rx="8" stroke="currentColor" stroke-width="3" fill="currentColor"
+          fill-opacity=".1" />
+        <!-- Cabin -->
+        <rect x="115" y="60" width="110" height="78" rx="5" stroke="currentColor" stroke-width="2.5" fill="currentColor"
+          fill-opacity=".15" />
+        <!-- Windshield -->
+        <rect x="126" y="70" width="82" height="48" rx="3" stroke="currentColor" stroke-width="2" fill="currentColor"
+          fill-opacity=".08" />
+        <!-- Mast -->
+        <rect x="280" y="18" width="14" height="222" rx="3" stroke="currentColor" stroke-width="2.5" fill="currentColor"
+          fill-opacity=".12" />
+        <!-- Fork arms -->
+        <rect x="293" y="148" width="100" height="14" rx="4" fill="currentColor" fill-opacity=".35"
+          stroke="currentColor" stroke-width="2" />
+        <rect x="293" y="172" width="100" height="14" rx="4" fill="currentColor" fill-opacity=".35"
+          stroke="currentColor" stroke-width="2" />
+        <!-- Pallet on forks -->
+        <rect x="293" y="108" width="90" height="42" rx="4" stroke="currentColor" stroke-width="2" fill="currentColor"
+          fill-opacity=".1" />
+        <line x1="293" y1="129" x2="383" y2="129" stroke="currentColor" stroke-width="1.5" opacity=".5" />
+        <line x1="318" y1="108" x2="318" y2="150" stroke="currentColor" stroke-width="1.5" opacity=".4" />
+        <line x1="348" y1="108" x2="348" y2="150" stroke="currentColor" stroke-width="1.5" opacity=".4" />
+        <!-- Wheels -->
+        <circle cx="145" cy="240" r="30" stroke="currentColor" stroke-width="3" fill="none" />
+        <circle cx="145" cy="240" r="11" fill="currentColor" fill-opacity=".35" />
+        <circle cx="230" cy="240" r="30" stroke="currentColor" stroke-width="3" fill="none" />
+        <circle cx="230" cy="240" r="11" fill="currentColor" fill-opacity=".35" />
+        <!-- Counterweight -->
+        <rect x="68" y="158" width="38" height="82" rx="6" stroke="currentColor" stroke-width="2.5" fill="currentColor"
+          fill-opacity=".18" />
+        <!-- Operator silhouette -->
+        <circle cx="165" cy="88" r="17" stroke="currentColor" stroke-width="2.5" fill="currentColor"
+          fill-opacity=".18" />
+        <rect x="150" y="103" width="30" height="38" rx="4" stroke="currentColor" stroke-width="2" fill="currentColor"
+          fill-opacity=".1" />
+      </svg>
+    </div>
+
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag" data-tr="Neden Termoland?" data-en="Why Termoland?">Neden Termoland?</span>
+        <h2 data-tr="Farkımız" data-en="Our Difference">Farkımız</h2>
+      </div>
+      <div class="why-grid">
+
+        <div class="why-card reveal-up" style="--delay:.1s">
+          <div class="why-icon">
+            <svg viewBox="0 0 52 52" fill="none">
+              <path d="M26 5 L31 19 L46 19 L34 28 L38 43 L26 34 L14 43 L18 28 L6 19 L21 19 Z" stroke="currentColor"
+                stroke-width="2" fill="currentColor" fill-opacity=".15" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h3 data-tr="Kalite Standartları" data-en="Quality Standards">Kalite Standartları</h3>
+          <p data-tr="Her üründe en yüksek kalite standartlarını uyguluyoruz. Uluslararası sertifikasyonlarla güvence altındayız."
+            data-en="We apply the highest quality standards in every product. Assured by international certifications.">
+            Her üründe en yüksek kalite standartlarını uyguluyoruz. Uluslararası sertifikasyonlarla güvence altındayız.
+          </p>
+        </div>
+
+        <div class="why-card reveal-up" style="--delay:.2s">
+          <div class="why-icon">
+            <svg viewBox="0 0 52 52" fill="none">
+              <circle cx="26" cy="26" r="22" stroke="currentColor" stroke-width="2" />
+              <path d="M26 10 C18 10 10 18 10 26 C10 34 18 42 26 42" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" />
+              <path d="M26 42 C34 42 42 34 42 26 C42 18 34 10 26 10" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-dasharray="5 4" />
+              <path d="M26 6 L26 14 M46 26 L38 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3 data-tr="Sürdürülebilirlik" data-en="Sustainability">Sürdürülebilirlik</h3>
+          <p data-tr="Çevre dostu üretim süreçleri ve geri dönüştürülebilir malzemelerle gelecek nesillere sorumlu yaklaşıyoruz."
+            data-en="We approach future generations responsibly with eco-friendly production processes and recyclable materials.">
+            Çevre dostu üretim süreçleri ve geri dönüştürülebilir malzemelerle gelecek nesillere sorumlu yaklaşıyoruz.
+          </p>
+        </div>
+
+        <div class="why-card reveal-up" style="--delay:.3s">
+          <div class="why-icon">
+            <svg viewBox="0 0 52 52" fill="none">
+              <circle cx="26" cy="26" r="22" stroke="currentColor" stroke-width="2" />
+              <path d="M26 14 L26 26 L34 31" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h3 data-tr="Zamanında Teslimat" data-en="Timely Delivery">Zamanında Teslimat</h3>
+          <p data-tr="Lojistik uzmanlığımız ve güvenilir tedarik zinciri yönetimimizle teslimatta sözümüzü tutuyoruz."
+            data-en="We keep our delivery promises with logistics expertise and reliable supply chain management.">
+            Lojistik uzmanlığımız ve güvenilir tedarik zinciri yönetimimizle teslimatta sözümüzü tutuyoruz.
+          </p>
+        </div>
+
+        <div class="why-card reveal-up" style="--delay:.4s">
+          <div class="why-icon">
+            <svg viewBox="0 0 52 52" fill="none">
+              <circle cx="18" cy="20" r="8" stroke="currentColor" stroke-width="2" />
+              <circle cx="36" cy="14" r="6" stroke="currentColor" stroke-width="2" />
+              <circle cx="40" cy="36" r="7" stroke="currentColor" stroke-width="2" />
+              <line x1="25" y1="20" x2="31" y2="16" stroke="currentColor" stroke-width="2" />
+              <line x1="34" y1="20" x2="36" y2="29" stroke="currentColor" stroke-width="2" />
+              <line x1="22" y1="27" x2="33" y2="32" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
+          <h3 data-tr="Global Ağ" data-en="Global Network">Global Ağ</h3>
+          <p data-tr="16 ülkede güçlü iş ortaklıkları ve dağıtım kanallarıyla küresel bir erişim ağına sahibiz."
+            data-en="We have a global reach network with strong business partnerships and distribution channels in 16 countries.">
+            16 ülkede güçlü iş ortaklıkları ve dağıtım kanallarıyla küresel bir erişim ağına sahibiz.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag" data-tr="İletişim" data-en="Contact">İletişim</span>
+        <h2 data-tr="Bize Ulaşın" data-en="Get In Touch">Bize Ulaşın</h2>
+      </div>
+      <div class="contact-grid">
+
+        <div class="contact-form-wrap reveal-left">
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fromName" data-tr="Ad Soyad" data-en="Full Name">Ad Soyad</label>
+                <input type="text" id="fromName" name="from_name" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="fromEmail" data-tr="E-posta" data-en="Email">E-posta</label>
+                <input type="email" id="fromEmail" name="from_email" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject" data-tr="Konu" data-en="Subject">Konu</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            <div class="form-group">
+              <label for="message" data-tr="Mesajınız" data-en="Your Message">Mesajınız</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-full" id="submitBtn">
+              <span class="btn-text" data-tr="Gönder" data-en="Send Message">Gönder</span>
+              <span class="btn-spinner" style="display:none">⟳</span>
+            </button>
+            <p class="form-feedback success" id="formSuccess" style="display:none"
+              data-tr="✓ Mesajınız iletildi! En kısa sürede dönüş yapacağız."
+              data-en="✓ Your message was sent! We'll get back to you shortly.">
+              ✓ Mesajınız iletildi! En kısa sürede dönüş yapacağız.
+            </p>
+            <p class="form-feedback error" id="formError" style="display:none"
+              data-tr="✗ Bir hata oluştu. Lütfen tekrar deneyin." data-en="✗ An error occurred. Please try again.">
+              ✗ Bir hata oluştu. Lütfen tekrar deneyin.
+            </p>
+          </form>
+        </div>
+
+        <div class="contact-info reveal-right">
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+            </div>
+            <div>
+              <h4 data-tr="Adres" data-en="Address">Adres</h4>
+              <p>Tümsan 1. Kısım San. Sitesi<br>5. Blok No:6, Başakşehir<br>İstanbul, Türkiye</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+              </svg>
+            </div>
+            <div>
+              <h4 data-tr="Telefon" data-en="Phone">Telefon</h4>
+              <p><a href="tel:+905343956402">+90 534 395 64 02</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+            </div>
+            <div>
+              <h4>E-posta</h4>
+              <p><a href="mailto:info@termoland.com.tr">info@termoland.com.tr</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm.01 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
+              </svg>
+            </div>
+            <div>
+              <h4 data-tr="Çalışma Saatleri" data-en="Working Hours">Çalışma Saatleri</h4>
+              <p data-tr="Pzt – Cum: 08:00 – 19:00" data-en="Mon – Fri: 08:00 – 19:00">Pzt – Cum: 08:00 – 19:00</p>
+            </div>
+          </div>
+
+          <!-- EmailJS config note -->
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo-wrap">
+            <img src="assets/logo.png" alt="Termoland" />
+          </div>
+          <p data-tr="Sınırları Aşan Kalite" data-en="Quality Without Borders">Sınırları Aşan Kalite</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-tr="Hızlı Linkler" data-en="Quick Links">Hızlı Linkler</h4>
+          <ul>
+            <li><a href="#hero" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a></li>
+            <li><a href="#about" data-tr="Hakkımızda" data-en="About">Hakkımızda</a></li>
+            <li><a href="#products" data-tr="Ürünler" data-en="Products">Ürünler</a></li>
+            <li><a href="#export" data-tr="İhracat" data-en="Export">İhracat</a></li>
+            <li><a href="#contact" data-tr="İletişim" data-en="Contact">İletişim</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-tr="Ürünlerimiz" data-en="Products">Ürünlerimiz</h4>
+          <ul>
+            <li>TPU – Termoplastik Poliüretan</li>
+            <li>TPR – Termoplastik Kauçuk</li>
+            <li>TR Light</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-tr="İletişim" data-en="Contact">İletişim</h4>
+          <ul>
+            <li><a href="tel:+905343956402">+90 534 395 64 02</a></li>
+            <li><a href="mailto:info@termoland.com.tr">info@termoland.com.tr</a></li>
+            <li>Başakşehir, İstanbul</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Termoland Dış Ticaret Ltd. <span data-tr="Tüm hakları saklıdır." data-en="All rights reserved.">Tüm
+            hakları saklıdır.</span></p>
+        <p class="footer-sub" data-tr="Özkul Termoplastik bünyesinde" data-en="Under Özkul Termoplastik">Özkul
+          Termoplastik bünyesinde</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/counter.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+/* ============================================================
+   TERMOLAND – Responsive
+   ============================================================ */
+
+/* ---- Tablet (≤ 1024px) ------------------------------------ */
+@media (max-width: 1024px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .products-grid .product-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .about-grid {
+    gap: 40px;
+  }
+}
+
+/* ---- Medium tablet (≤ 900px) ------------------------------ */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---- Mobile (≤ 768px) ------------------------------------- */
+@media (max-width: 768px) {
+  :root { --nav-h: 64px; }
+
+  /* Nav */
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero */
+  .hero-logo-wrap { width: 88px; height: 88px; }
+  .hero-brand-text { font-size: clamp(2rem, 12vw, 3.5rem); }
+  .hero-cta { flex-direction: column; align-items: center; }
+  .hero-cta a { width: 100%; max-width: 280px; justify-content: center; }
+
+  /* Sections */
+  #about, #products, #export, #why, #contact { padding: 80px 0; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-stats { grid-template-columns: repeat(2, 1fr); }
+
+  /* Products */
+  .products-grid { grid-template-columns: 1fr; }
+  .products-grid .product-card:last-child {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
+  }
+  .product-card { height: 340px; }
+
+  /* Why */
+  .why-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  /* Contact */
+  .form-row { grid-template-columns: 1fr; }
+  .contact-form-wrap { padding: 28px 20px; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding: 48px 0 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 4px; }
+
+  /* Section header */
+  .section-header { margin-bottom: 36px; }
+  .section-header h2 { font-size: 1.8rem; }
+
+  /* Countries grid */
+  .countries-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+}
+
+/* ---- Small mobile (≤ 480px) ------------------------------- */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .about-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat-number { font-size: 2.4rem; }
+  .footer-top { grid-template-columns: 1fr; }
+
+  .hero-logo-wrap { width: 74px; height: 74px; }
+  .hero-brand-text { letter-spacing: .1em; }
+
+  .contact-form-wrap { padding: 20px 16px; }
+
+  .why-card { padding: 28px 20px; }
+  .card-front, .card-back { padding: 28px 20px; }
+}
+
+/* ---- Large (≥ 1400px) ------------------------------------ */
+@media (min-width: 1400px) {
+  .container { max-width: 1320px; }
+  .why-grid { gap: 32px; }
+  .products-grid { gap: 36px; }
+}
+
+/* ---- Touch device: disable flip on hover, use click ------- */
+@media (hover: none) {
+  .product-card .card-inner { transition: transform .5s; }
+  .product-card .card-inner.flipped { transform: rotateY(180deg); }
+  .product-card:hover .card-inner { transform: none; }
+}
+
+/* ---- Reduced motion --------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
