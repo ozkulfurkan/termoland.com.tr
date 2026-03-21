@@ -19,4 +19,9 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           source: "./"
           target: "/home/u2602314/public_html"
-          exclude: ".git,.github,node_modules"
+
+
+
+
+
+          
