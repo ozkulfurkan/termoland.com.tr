@@ -18,7 +18,7 @@ jobs:
           username: u2626782@termoland.com.tr
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true
           exclude: |
             **/.git*
             **/.git*/**
