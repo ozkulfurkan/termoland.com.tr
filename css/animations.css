@@ -146,13 +146,6 @@
   animation-delay: var(--delay, 0s);
 }
 
-/* ---- Product card entrance ------------------------------- */
-/* Use fadeIn (opacity only) — transform animations conflict with
-   the holographic perspective/tilt transform on .product-card */
-.product-card.visible {
-  animation: fadeIn .5s both;
-  animation-delay: var(--delay, 0s);
-}
 
 /* ---- Nav link underline slide ---------------------------- */
 .nav-links a {

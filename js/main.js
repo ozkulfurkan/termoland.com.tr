@@ -279,19 +279,30 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!isTouch) {
       card.addEventListener('mousemove', e => applyTilt(e.clientX, e.clientY));
       card.addEventListener('mouseleave', resetTilt);
+      card.addEventListener('click', () => {
+        const key = card.dataset.key;
+        if (key && PRODUCT_DATA[key]) openModal(key);
+      });
     } else {
-      card.addEventListener('touchmove', e => {
-        const t = e.touches[0];
-        applyTilt(t.clientX, t.clientY);
+      let touchStartX = 0, touchStartY = 0;
+      card.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
       }, { passive: true });
-      card.addEventListener('touchend', resetTilt);
+      card.addEventListener('touchmove', e => {
+        applyTilt(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+      card.addEventListener('touchend', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+        resetTilt();
+        // Tap (küçük hareket) → modal aç
+        if (dx < 10 && dy < 10) {
+          const key = card.dataset.key;
+          if (key && PRODUCT_DATA[key]) openModal(key);
+        }
+      });
     }
-
-    // Click → open modal
-    card.addEventListener('click', () => {
-      const key = card.dataset.key;
-      if (key && PRODUCT_DATA[key]) openModal(key);
-    });
   });
 
   /* ========================================================
