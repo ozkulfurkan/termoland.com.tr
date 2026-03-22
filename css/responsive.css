@@ -109,11 +109,23 @@
   .products-grid { gap: 36px; }
 }
 
-/* ---- Touch device: disable flip on hover, use click ------- */
-@media (hover: none), (pointer: coarse) {
-  .product-card .card-inner { transition: transform .5s; }
-  .product-card .card-inner.flipped { transform: rotateY(180deg); }
-  .product-card:hover .card-inner { transform: none; }
+/* ---- Product modal responsive ----------------------------- */
+@media (max-width: 600px) {
+  .product-modal { padding: 16px; }
+  .modal-inner {
+    grid-template-columns: 1fr;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+  .modal-img-side { padding: 28px 24px; }
+  .modal-img-side img { max-height: 200px; }
+  .modal-info-side { padding: 28px 20px; }
+  .modal-title { font-size: 1.9rem; }
+}
+
+/* ---- Touch device: reset tilt on non-hover devices -------- */
+@media (hover: none) {
+  .product-card:hover { transform: none; }
 }
 
 /* ---- Contact info: slide-up instead of slide-right on mobile --- */
@@ -131,4 +143,6 @@
     transition-duration: .01ms !important;
   }
   html { scroll-behavior: auto; }
+}
+ { scroll-behavior: auto; }
 }

@@ -529,102 +529,258 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 28px;
 }
 .product-card {
-  perspective: 1000px;
-  height: 380px;
-  animation-delay: var(--delay, 0s);
-}
-.card-inner {
   position: relative;
-  width: 100%; height: 100%;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  transition: transform .7s cubic-bezier(.4,0,.2,1);
+  height: 380px;
   border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0f0c29 0%, #24243e 50%, #0f172a 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+  transform: perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition: box-shadow 0.4s ease;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
 }
-.product-card:hover .card-inner { transform: rotateY(180deg); }
-.card-front, .card-back {
+.product-card:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(107,15,26,0.3);
+}
+/* Hover colour overlay — bordo / white / black */
+.card-hover-bg {
   position: absolute;
   inset: 0;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-radius: var(--radius);
-  padding: 40px 32px;
+  border-radius: inherit;
+  background: linear-gradient(145deg, #6B0F1A 0%, #3d0a10 55%, #0a0a0a 100%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 0;
+}
+.product-card:hover .card-hover-bg { opacity: 1; }
+.holo-foil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at var(--px,50%) var(--py,50%), rgba(255,255,255,0.18) 0%, transparent 55%),
+    repeating-linear-gradient(
+      var(--angle,125deg),
+      hsla(0,  80%,65%,.4)   0%,
+      hsla(45, 90%,60%,.4)  12%,
+      hsla(90, 80%,55%,.4)  24%,
+      hsla(150,80%,55%,.4)  36%,
+      hsla(200,85%,60%,.4)  48%,
+      hsla(260,80%,65%,.4)  60%,
+      hsla(310,80%,65%,.4)  72%,
+      hsla(355,80%,65%,.4)  84%,
+      hsla(0,  80%,65%,.4) 100%
+    );
+  mix-blend-mode: color-dodge;
+  opacity: var(--foil-o, 0);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.holo-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--px,50%) var(--py,50%),
+    rgba(255,255,255,.28) 0%,
+    rgba(255,255,255,.06) 28%,
+    transparent 55%
+  );
+  opacity: var(--glare-o, 0);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.card-content {
+  position: relative;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-.card-front {
-  background: var(--white);
-  border: 1px solid var(--card-border);
-  box-shadow: 0 4px 20px rgba(107,0,0,.08);
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-.product-card:hover .card-front {
-  border-color: var(--bordo);
-  box-shadow: 0 8px 32px rgba(107,0,0,.15);
-}
-.card-back {
-  background: linear-gradient(135deg, var(--bordo-dark) 0%, var(--bordo) 100%);
-  border: 1px solid var(--bordo-light);
-  transform: rotateY(180deg);
-  align-items: flex-start;
-  text-align: left;
-  box-shadow: 0 8px 32px rgba(107,0,0,.3);
+  padding: 40px 32px;
+  height: 100%;
 }
 .card-icon {
-  width: 72px; height: 72px;
-  color: var(--bordo);
-  margin-bottom: 24px;
-  transition: transform var(--transition);
+  width: 68px; height: 68px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 22px;
+  animation: floatY 4s ease-in-out infinite;
 }
-.product-card:hover .card-icon { transform: scale(1.1); }
-.card-front h3 {
+.card-content h3 {
   font-family: var(--font-head);
   font-size: 2rem;
   font-weight: 800;
-  margin-bottom: 8px;
-  color: var(--text-main);
+  color: #fff;
+  margin-bottom: 6px;
 }
 .card-type {
-  font-size: .82rem;
-  color: var(--text-muted);
-  letter-spacing: .06em;
+  font-size: .8rem;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
 }
-.card-flip-hint {
-  position: absolute;
-  bottom: 20px;
-  color: var(--bordo);
-  width: 20px;
-  opacity: .5;
-  animation: bounce 2s ease-in-out infinite;
+.card-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
 }
-.card-back h3 {
-  font-family: var(--font-head);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--white);
-  margin-bottom: 14px;
-}
-.card-back p {
-  font-size: .88rem;
-  color: rgba(255,255,255,.85);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-.card-back ul { display: flex; flex-direction: column; gap: 8px; }
-.card-back li {
+.card-features li {
   font-size: .84rem;
-  color: rgba(255,255,255,.8);
+  color: rgba(255,255,255,.75);
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.card-back li::before {
-  content: '▸';
-  color: rgba(255,220,220,.9);
-  font-size: .7rem;
+.card-features li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6, #818cf8);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   PRODUCT MODAL
+   ============================================================ */
+.product-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.product-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.modal-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  max-width: 780px;
+  width: 100%;
+  max-height: 90vh;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1);
+}
+.product-modal.active .modal-inner {
+  transform: scale(1) translateY(0);
+}
+.modal-img-side {
+  background: linear-gradient(145deg, #1a0306 0%, #6B0F1A 60%, #3d0a10 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+.modal-img-side img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.5));
+}
+.modal-info-side {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 36px;
+  overflow-y: auto;
+}
+.modal-product-tag {
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--bordo);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.modal-title {
+  font-family: var(--font-head);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.modal-subtitle {
+  font-size: .8rem;
+  color: var(--text-muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid var(--card-border);
+}
+.modal-desc {
+  font-size: .92rem;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+.modal-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-spec-row {
+  display: flex;
+  gap: 10px;
+  font-size: .84rem;
+}
+.spec-label {
+  font-weight: 700;
+  color: var(--bordo);
+  min-width: 120px;
+  flex-shrink: 0;
+}
+.spec-value { color: #333; }
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 10;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.07);
+  border: 1.5px solid rgba(0,0,0,0.12);
+  color: #555;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.modal-close:hover {
+  background: var(--bordo);
+  border-color: var(--bordo);
+  color: #fff;
 }
 
 /* ============================================================

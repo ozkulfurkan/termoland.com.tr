@@ -1,13 +1,38 @@
 /* ============================================================
    TERMOLAND – main.js
-   · Navbar scroll behaviour
-   · Hamburger mobile menu
-   · Scroll reveal (Intersection Observer)
-   · Active nav link highlight
-   · Typewriter hero text
-   · Particle canvas hero background
-   · Touch flip for product cards
    ============================================================ */
+
+/* ============================================================
+   PRODUCT MODAL DATA
+   ============================================================ */
+const PRODUCT_DATA = {
+  'TPU': {
+    img:   'assets/tpu-sole.svg',
+    title: 'TPU',
+    sub:   'Termoplastik Poliüretan',
+    desc:  'Portföyümüzde, 75–85 Shore A sertlikte, transparent TPU (Termoplastik Poliüretan) hammadde seçenekleri yer almaktadır.',
+    specs: [
+      { label: 'Malzeme Türü', value: 'TPU (Termoplastik Poliüretan)' },
+      { label: 'Sertlik',      value: '75–85 Shore A' },
+      { label: 'Renk',         value: 'Transparent (Şeffaf)' },
+      { label: 'Form',         value: 'Granül hammadde' }
+    ]
+  },
+  'TPR': {
+    img:   'assets/tpr-sole.svg',
+    title: 'TPR',
+    sub:   'Termoplastik Kauçuk',
+    desc:  'Ayakkabı sektöründe en çok tüketilen standart hafiflikte aşınma direncine sahip üründür. ÖZKUL TERMOPLASTİK bünyesinde 1000 civarında renk bulunmaktadır.',
+    specs: []
+  },
+  'TR Light': {
+    img:   'assets/tr-light-sole.svg',
+    title: 'TR Light',
+    sub:   'Hafif Taban Malzemesi',
+    desc:  'Alışılmışın dışında hafiflikte ve mükemmel cilt görünümü ile taban sektöründe son yılların trendi olan bu ürün bünyemizde farklı renklerde üretilmektedir. Bu hammadde sayesinde ayakkabılar artık daha hafif.',
+    specs: []
+  }
+};
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -217,15 +242,88 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ========================================================
-     TOUCH FLIP for product cards (mobile / no-hover)
+     HOLOGRAPHIC CARD — tilt + foil + glare
      ====================================================== */
-  if (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches) {
-    document.querySelectorAll('.product-card').forEach(card => {
-      card.addEventListener('click', function () {
-        const inner = this.querySelector('.card-inner');
-        inner.classList.toggle('flipped');
-      });
+  const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+  document.querySelectorAll('.product-card').forEach(card => {
+    function applyTilt(clientX, clientY) {
+      const rect = card.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width;
+      const y = (clientY - rect.top)  / rect.height;
+      const rx = (y - 0.5) * -18;
+      const ry = (x - 0.5) *  18;
+      card.style.setProperty('--rx',      `${rx}deg`);
+      card.style.setProperty('--ry',      `${ry}deg`);
+      card.style.setProperty('--px',      `${(x * 100).toFixed(1)}%`);
+      card.style.setProperty('--py',      `${(y * 100).toFixed(1)}%`);
+      card.style.setProperty('--angle',   `${125 + ry}deg`);
+      card.style.setProperty('--foil-o',  '1');
+      card.style.setProperty('--glare-o', '0.8');
+    }
+
+    function resetTilt() {
+      card.style.setProperty('--rx',      '0deg');
+      card.style.setProperty('--ry',      '0deg');
+      card.style.setProperty('--foil-o',  '0');
+      card.style.setProperty('--glare-o', '0');
+    }
+
+    if (!isTouch) {
+      card.addEventListener('mousemove', e => applyTilt(e.clientX, e.clientY));
+      card.addEventListener('mouseleave', resetTilt);
+    } else {
+      card.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        applyTilt(t.clientX, t.clientY);
+      }, { passive: true });
+      card.addEventListener('touchend', resetTilt);
+    }
+
+    // Click → open modal
+    card.addEventListener('click', () => {
+      const key = card.dataset.key;
+      if (key && PRODUCT_DATA[key]) openModal(key);
     });
+  });
+
+  /* ========================================================
+     PRODUCT MODAL
+     ====================================================== */
+  const modal       = document.getElementById('productModal');
+  const modalClose  = document.getElementById('modalClose');
+  const modalBd     = document.getElementById('modalBackdrop');
+  const modalImg    = document.getElementById('modalImg');
+  const modalTag    = document.getElementById('modalTag');
+  const modalTitle  = document.getElementById('modalTitle');
+  const modalSub    = document.getElementById('modalSub');
+  const modalDesc   = document.getElementById('modalDesc');
+  const modalSpecs  = document.getElementById('modalSpecs');
+
+  function openModal(key) {
+    const d = PRODUCT_DATA[key];
+    modalImg.src      = d.img;
+    modalImg.alt      = d.title;
+    modalTag.textContent   = 'Ürün Detayı';
+    modalTitle.textContent = d.title;
+    modalSub.textContent   = d.sub;
+    modalDesc.textContent  = d.desc;
+    modalSpecs.innerHTML   = d.specs.map(s =>
+      `<div class="modal-spec-row"><span class="spec-label">${s.label}</span><span class="spec-value">${s.value}</span></div>`
+    ).join('');
+    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modalBd)    modalBd.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 });
