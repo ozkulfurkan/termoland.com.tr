@@ -1137,3 +1137,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   opacity: 1;
   transform: none;
 }
+
+/* Product cards: opacity-only reveal — translateY conflicts with holographic transform */
+.product-card.reveal-up { transform: none; }
+.product-card.reveal-up.visible { transform: none; }

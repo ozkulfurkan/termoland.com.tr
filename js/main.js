@@ -100,9 +100,17 @@ document.addEventListener('DOMContentLoaded', function () {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0, rootMargin: '0px' });
 
   revealEls.forEach(el => revealObserver.observe(el));
+
+  // Fallback for iOS Safari where IntersectionObserver can misbehave
+  // with overflow:hidden on body — force-reveal after 2s
+  setTimeout(() => {
+    revealEls.forEach(el => {
+      if (!el.classList.contains('visible')) el.classList.add('visible');
+    });
+  }, 2000);
 
   /* ========================================================
      SMOOTH SCROLL (anchor links)
@@ -253,8 +261,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const y = (clientY - rect.top)  / rect.height;
       const rx = (y - 0.5) * -18;
       const ry = (x - 0.5) *  18;
-      card.style.setProperty('--rx',      `${rx}deg`);
-      card.style.setProperty('--ry',      `${ry}deg`);
+      // Set transform via inline style to override any CSS animation fill-mode
+      card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg)`;
       card.style.setProperty('--px',      `${(x * 100).toFixed(1)}%`);
       card.style.setProperty('--py',      `${(y * 100).toFixed(1)}%`);
       card.style.setProperty('--angle',   `${125 + ry}deg`);
@@ -263,8 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function resetTilt() {
-      card.style.setProperty('--rx',      '0deg');
-      card.style.setProperty('--ry',      '0deg');
+      card.style.transform = '';
       card.style.setProperty('--foil-o',  '0');
       card.style.setProperty('--glare-o', '0');
     }

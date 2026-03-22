@@ -147,11 +147,10 @@
 }
 
 /* ---- Product card entrance ------------------------------- */
-/* NOTE: Must use fadeSlideUp (not popIn/scale) here.
-   popIn applies transform:scale to .product-card which has perspective:1000px,
-   and a non-none transform on a perspective container breaks 3D child flips. */
+/* Use fadeIn (opacity only) — transform animations conflict with
+   the holographic perspective/tilt transform on .product-card */
 .product-card.visible {
-  animation: fadeSlideUp .6s both;
+  animation: fadeIn .5s both;
   animation-delay: var(--delay, 0s);
 }
 
