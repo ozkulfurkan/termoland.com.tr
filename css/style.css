@@ -536,6 +536,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .card-inner {
   position: relative;
   width: 100%; height: 100%;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transition: transform .7s cubic-bezier(.4,0,.2,1);
   border-radius: var(--radius);
@@ -544,6 +545,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .card-front, .card-back {
   position: absolute;
   inset: 0;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: var(--radius);
   padding: 40px 32px;

@@ -110,10 +110,18 @@
 }
 
 /* ---- Touch device: disable flip on hover, use click ------- */
-@media (hover: none) {
+@media (hover: none), (pointer: coarse) {
   .product-card .card-inner { transition: transform .5s; }
   .product-card .card-inner.flipped { transform: rotateY(180deg); }
   .product-card:hover .card-inner { transform: none; }
+}
+
+/* ---- Contact info: slide-up instead of slide-right on mobile --- */
+/* Prevents overflow-x: hidden on body from clipping the reveal */
+@media (max-width: 900px) {
+  .contact-info.reveal-right {
+    transform: translateY(20px);
+  }
 }
 
 /* ---- Reduced motion --------------------------------------- */

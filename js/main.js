@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
 
   revealEls.forEach(el => revealObserver.observe(el));
 
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ========================================================
      TOUCH FLIP for product cards (mobile / no-hover)
      ====================================================== */
-  if (window.matchMedia('(hover: none)').matches) {
+  if (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches) {
     document.querySelectorAll('.product-card').forEach(card => {
       card.addEventListener('click', function () {
         const inner = this.querySelector('.card-inner');
