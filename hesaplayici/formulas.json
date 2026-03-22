@@ -1,0 +1,69 @@
+[
+    {
+        "id": 1774109275361,
+        "name": "Formül 1",
+        "kdv": 0.2,
+        "kurs": {
+            "TL": 1,
+            "USD": 44.8,
+            "EUR": 51.5
+        },
+        "iscilik": {
+            "val": 11.745,
+            "cur": "TL"
+        },
+        "rows": [
+            {
+                "id": "9c84c9laegm",
+                "name": "SBS",
+                "qty": "200",
+                "cur": "USD",
+                "exVat": "1.8333",
+                "inVat": "2.2"
+            },
+            {
+                "id": "4tthii3wlxd",
+                "name": "Kristal",
+                "qty": "60",
+                "cur": "TL",
+                "exVat": "43.3333",
+                "inVat": "52"
+            },
+            {
+                "id": "tmh6gpogzgd",
+                "name": "Yağ",
+                "qty": "42",
+                "cur": "TL",
+                "exVat": "55.8333",
+                "inVat": "67"
+            },
+            {
+                "id": "xydnmw5lys",
+                "name": "Kalsit",
+                "qty": "60",
+                "cur": "TL",
+                "exVat": "5",
+                "inVat": "6.0000"
+            },
+            {
+                "id": "sf8vukawmoa",
+                "name": "Titandiyoksit",
+                "qty": "5",
+                "cur": "EUR",
+                "exVat": "2.8",
+                "inVat": "3.3600"
+            },
+            {
+                "id": "6t5ytz8kgy7",
+                "name": "Optik Beyaz Boya",
+                "qty": "0.1",
+                "cur": "USD",
+                "exVat": "30",
+                "inVat": "36.0000"
+            }
+        ],
+        "totalKg": 367.1,
+        "perKg": 85.38291882320893,
+        "date": "21.03.2026"
+    }
+]

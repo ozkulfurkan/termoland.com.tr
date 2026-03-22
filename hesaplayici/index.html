@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TERMOLAND — Hammadde Maliyet Hesaplayıcı</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f4f4f4;color:#111;min-height:100vh}
+
+/* ---- LOGIN ---- */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1a0306 0%,#6B0F1A 60%,#3d0a10 100%)}
+.login-card{background:#fff;border-radius:16px;padding:2.5rem 2rem;width:100%;max-width:360px;box-shadow:0 8px 40px rgba(0,0,0,0.25)}
+.login-logo{width:56px;height:56px;background:#6B0F1A;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;margin:0 auto 1rem}
+.login-title{text-align:center;font-size:20px;font-weight:700;color:#111;margin-bottom:4px}
+.login-sub{text-align:center;font-size:13px;color:#888;margin-bottom:1.75rem}
+.login-label{font-size:12px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:5px}
+.login-input{width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;color:#111;background:#fafafa;margin-bottom:1rem;transition:border-color .15s}
+.login-input:focus{outline:none;border-color:#6B0F1A}
+.login-btn{width:100%;padding:11px;background:#6B0F1A;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s}
+.login-btn:hover{background:#550c15}
+.login-error{background:#fce8e8;color:#8B1A1A;border-radius:7px;padding:9px 12px;font-size:13px;margin-bottom:1rem;display:none}
+.login-error.show{display:block}
+
+/* ---- APP ---- */
+#app-screen{display:none}
+.topbar{background:#6B0F1A;color:#fff;padding:0.65rem 1.25rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
+.topbar-logo{width:30px;height:30px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
+.topbar-title{font-size:15px;font-weight:700;letter-spacing:0.02em}
+.topbar-user{margin-left:auto;font-size:12px;opacity:.8}
+.topbar-logout{background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:12px;padding:5px 10px;border-radius:6px;cursor:pointer}
+.topbar-logout:hover{background:rgba(255,255,255,0.25)}
+
+.app{padding:1.25rem 1rem;max-width:1060px;margin:0 auto}
+.save-status{font-size:12px;padding:4px 10px;border-radius:20px;background:#e8f5e9;color:#2e7d32;display:none;margin-left:auto}
+.save-status.error{background:#fce8e8;color:#8B1A1A}
+.save-status.show{display:inline-block}
+
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem}
+.section-title{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px}
+
+input[type=number],input[type=text],select{padding:6px 8px;border:1px solid #ddd;border-radius:6px;font-size:13px;background:#fafafa;color:#111;width:100%}
+input:focus,select:focus{outline:none;border-color:#6B0F1A}
+.btn{padding:7px 14px;border-radius:7px;font-size:13px;cursor:pointer;font-weight:500;border:1px solid #ccc;background:transparent;color:#111}
+.btn:hover{background:#f0f0f0}
+.btn-primary{background:#6B0F1A;color:#fff;border-color:#6B0F1A}
+.btn-primary:hover{background:#550c15}
+.btn-sm{padding:5px 10px;font-size:12px}
+.btn-danger{color:#c0392b;border-color:transparent;background:transparent}
+.btn-danger:hover{background:#fce8e8}
+
+.kur-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.kur-grid{grid-template-columns:1fr 1fr}}
+.kur-label{font-size:12px;color:#777;margin-bottom:4px}
+.kur-input-row{display:flex;align-items:center;gap:6px}
+.kur-badge{font-size:11px;font-weight:600;padding:3px 7px;border-radius:20px;white-space:nowrap;background:#fce8e8;color:#8B1A1A}
+
+.table-wrap{overflow-x:auto}
+table.ing-table{width:100%;border-collapse:collapse;font-size:12px;min-width:720px}
+table.ing-table th{text-align:left;padding:7px 5px;font-weight:700;font-size:10px;color:#888;text-transform:uppercase;border-bottom:1px solid #eee;white-space:nowrap}
+table.ing-table td{padding:5px 4px;vertical-align:middle;border-bottom:1px solid #f5f5f5}
+table.ing-table tr:last-child td{border-bottom:none}
+
+/* metrics */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px}
+.metric{background:#f8f8f8;border-radius:8px;padding:0.8rem;text-align:center}
+.metric-label{font-size:10px;color:#888;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.04em}
+.metric-value{font-size:17px;font-weight:700;color:#111}
+.metric-sub{font-size:10px;color:#aaa;margin-top:2px}
+.metric.hl-tl{background:#6B0F1A}
+.metric.hl-tl .metric-label{color:#f0c0c8}
+.metric.hl-tl .metric-value{color:#fff;font-size:22px}
+.metric.hl-tl .metric-sub{color:#f0c0c8}
+.metric.hl-usd{background:#0c3b6e}
+.metric.hl-usd .metric-label{color:#a8c8f0}
+.metric.hl-usd .metric-value{color:#fff;font-size:22px}
+.metric.hl-usd .metric-sub{color:#a8c8f0}
+
+.iscilik-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.iscilik-row label{font-size:13px;color:#555;white-space:nowrap}
+.iscilik-row input{width:130px}
+.iscilik-row select{width:85px}
+
+.formula-row{display:flex;gap:8px;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
+.formula-row input{flex:1;min-width:200px;font-size:14px}
+
+.saved-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid #eee;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:background .12s}
+.saved-item:hover{background:#f9f9f9}
+.saved-name{font-weight:700;font-size:13px;color:#111}
+.saved-meta{font-size:11px;color:#888;margin-top:2px}
+.saved-actions{display:flex;gap:6px;flex-shrink:0}
+.empty{font-size:13px;color:#aaa;text-align:center;padding:1.5rem}
+.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<!-- ===================== LOGIN ===================== -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">T</div>
+    <div class="login-title">TERMOLAND</div>
+    <div class="login-sub">Hammadde Maliyet Hesaplayıcı</div>
+    <div class="login-error" id="login-error"></div>
+    <label class="login-label">Kullanıcı Adı</label>
+    <input class="login-input" type="text" id="l-user" autocomplete="username" placeholder="kullanıcı adınız"/>
+    <label class="login-label">Şifre</label>
+    <input class="login-input" type="password" id="l-pass" autocomplete="current-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">Giriş Yap</button>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="app-screen">
+  <div class="topbar">
+    <div class="topbar-logo">T</div>
+    <div class="topbar-title">TERMOLAND</div>
+    <span class="topbar-user" id="topbar-user"></span>
+    <div id="save-status" class="save-status"></div>
+    <button class="topbar-logout" onclick="doLogout()">Çıkış</button>
+  </div>
+
+  <div class="app">
+
+    <!-- KUR -->
+    <div class="card">
+      <div class="section-title">Döviz Kurları (TL bazında)</div>
+      <div class="kur-grid">
+        <div>
+          <div class="kur-label">1 USD =</div>
+          <div class="kur-input-row">
+            <input type="number" id="kur-usd" value="38.50" step="0.01" min="0" oninput="recalc()"/>
+            <span class="kur-badge">₺</span>
+          </div>
+        </div>
+        <div>
+          <div class="kur-label">1 EUR =</div>
+          <div class="kur-input-row">
+            <input type="number" id="kur-eur" value="41.80" step="0.01" min="0" oninput="recalc()"/>
+            <span class="kur-badge">₺</span>
+          </div>
+        </div>
+        <div>
+          <div class="kur-label">KDV Oranı</div>
+          <select id="kdv-rate" onchange="recalc()">
+            <option value="0.20">%20</option>
+            <option value="0.10">%10</option>
+            <option value="0.08">%8</option>
+            <option value="0.18">%18</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMÜL -->
+    <div class="card">
+      <div class="formula-row">
+        <input type="text" id="formula-name" placeholder="Formül adı (örn: Beyaz TPU Mix #1)"/>
+      </div>
+      <div class="section-title">Hammaddeler</div>
+      <div class="table-wrap">
+        <table class="ing-table">
+          <thead>
+            <tr>
+              <th style="min-width:120px">Hammadde</th>
+              <th style="width:85px">Miktar (kg)</th>
+              <th style="width:75px">Para Birimi</th>
+              <th style="width:110px">Birim Fiyat KDV Hariç</th>
+              <th style="width:110px">Birim Fiyat KDV Dahil</th>
+              <th style="width:110px">Maliyet (₺, KDV Dahil)</th>
+              <th style="width:52px;text-align:center">Pay %</th>
+              <th style="width:32px"></th>
+            </tr>
+          </thead>
+          <tbody id="ing-body"></tbody>
+        </table>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+        <div style="font-size:12px;color:#888" id="total-kg-label">Toplam: 0.000 kg</div>
+        <button class="btn btn-sm" onclick="addRow()">+ Hammadde ekle</button>
+      </div>
+    </div>
+
+    <!-- İŞÇİLİK -->
+    <div class="card">
+      <div class="section-title">İşçilik Maliyeti</div>
+      <div class="iscilik-row">
+        <label>Kg başına işçilik:</label>
+        <input type="number" id="iscilik-val" placeholder="0.00" step="0.01" min="0" oninput="recalc()"/>
+        <select id="iscilik-cur" onchange="recalc()">
+          <option value="TL">₺ TL</option>
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+        </select>
+        <span style="font-size:12px;color:#888" id="iscilik-tl-label"></span>
+      </div>
+    </div>
+
+    <!-- METRİKLER -->
+    <div class="card">
+      <div class="section-title">Maliyet Özeti</div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">Toplam Ağırlık</div><div class="metric-value" id="m-kg">0.000 kg</div></div>
+        <div class="metric"><div class="metric-label">Hammadde KDV Hariç</div><div class="metric-value" id="m-ex">₺0.00</div></div>
+        <div class="metric"><div class="metric-label">KDV Tutarı</div><div class="metric-value" id="m-kdv">₺0.00</div></div>
+        <div class="metric"><div class="metric-label">Hammadde KDV Dahil</div><div class="metric-value" id="m-in">₺0.00</div></div>
+        <div class="metric"><div class="metric-label">Toplam İşçilik</div><div class="metric-value" id="m-iscilik">₺0.00</div></div>
+        <div class="metric hl-tl">
+          <div class="metric-label">Kg Başına Maliyet</div>
+          <div class="metric-value" id="m-per-kg-tl">₺0.00</div>
+          <div class="metric-sub">KDV dahil + işçilik</div>
+        </div>
+        <div class="metric hl-usd">
+          <div class="metric-label">Kg Başına Maliyet</div>
+          <div class="metric-value" id="m-per-kg-usd">$0.00</div>
+          <div class="metric-sub">KDV dahil + işçilik</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="saveFormula()">Formülü Kaydet</button>
+        <button class="btn" onclick="clearForm()">Temizle</button>
+      </div>
+    </div>
+
+    <!-- KAYITLI FORMÜLLER -->
+    <div class="card">
+      <div class="section-title">Kaydedilen Formüllerim</div>
+      <div id="saved-list"><div class="empty">Yükleniyor...</div></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const DEFAULTS = ['SBS','Kristal','Yağ','Kalsit','Titandiyoksit','Optik Beyaz Boya'];
+let rows = DEFAULTS.map(n=>({id:uid(),name:n,qty:'',cur:'TL',exVat:'',inVat:''}));
+let saved = [];
+let currentUser = null;
+
+function uid(){return Math.random().toString(36).slice(2,10)}
+function fmt2(n){return isNaN(n)?'0.00':n.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function fmt3(n){return isNaN(n)?'0.000':n.toLocaleString('tr-TR',{minimumFractionDigits:3,maximumFractionDigits:3})}
+function fmtUsd(n){return isNaN(n)?'$0.00':'$'+n.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+
+function getKurs(){return{TL:1,USD:parseFloat(document.getElementById('kur-usd').value)||38.5,EUR:parseFloat(document.getElementById('kur-eur').value)||41.8}}
+function getKdv(){return parseFloat(document.getElementById('kdv-rate').value)||0.2}
+function toTL(val,cur){return(parseFloat(val)||0)*getKurs()[cur]}
+
+// ---- AUTH ----
+async function checkSession(){
+  try{
+    const r=await fetch('save.php?action=check');
+    const d=await r.json();
+    if(d.ok){showApp(d.user);}else{showLogin();}
+  }catch(e){showLogin();}
+}
+
+async function doLogin(){
+  const btn=document.querySelector('.login-btn');
+  const user=document.getElementById('l-user').value.trim();
+  const pass=document.getElementById('l-pass').value;
+  if(!user||!pass){showLoginError('Kullanıcı adı ve şifre boş bırakılamaz');return;}
+  btn.disabled=true; btn.textContent='Giriş yapılıyor…';
+  try{
+    const r=await fetch('save.php?action=login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:user,password:pass})});
+    const d=await r.json();
+    if(d.ok){showApp(d.user);}else{showLoginError(d.error||'Giriş başarısız');}
+  }catch(e){showLoginError('Sunucuya bağlanılamadı');}
+  btn.disabled=false; btn.textContent='Giriş Yap';
+}
+
+async function doLogout(){
+  await fetch('save.php?action=logout');
+  currentUser=null; saved=[];
+  document.getElementById('app-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('l-pass').value='';
+}
+
+function handleUnauthorized(d){
+  if(d&&d.timeout){
+    showLogin();
+    setTimeout(()=>showLoginError('Oturum süresi doldu (30 dk hareketsizlik). Lütfen tekrar giriş yapın.'),100);
+  } else {
+    showLogin();
+  }
+}
+
+function showLoginError(msg){
+  const el=document.getElementById('login-error');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),5000);
+}
+
+function showLogin(){
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('app-screen').style.display='none';
+}
+
+function showApp(user){
+  currentUser=user;
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app-screen').style.display='block';
+  document.getElementById('topbar-user').textContent=user;
+  clearForm(); serverLoad();
+}
+
+// ---- BACKEND ----
+async function serverLoad(){
+  try{
+    const r=await fetch('save.php');
+    if(r.status===401){const d=await r.json();handleUnauthorized(d);return;}
+    saved=await r.json();
+  }catch(e){saved=[];showStatus('Formüller yüklenemedi',true);}
+  renderSaved();
+}
+
+async function serverSave(){
+  showStatus('Kaydediliyor…',false,true);
+  try{
+    const r=await fetch('save.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(saved)});
+    if(r.status===401){const d=await r.json();handleUnauthorized(d);return;}
+    const d=await r.json();
+    if(d.error)throw new Error(d.error);
+    showStatus('Kaydedildi',false);
+  }catch(e){showStatus('Hata: '+(e.message||'Bilinmeyen hata'),true);}
+}
+
+function showStatus(msg,isErr,neutral){
+  const el=document.getElementById('save-status');
+  el.textContent=msg;
+  el.className='save-status show'+(isErr?' error':'');
+  if(!neutral)setTimeout(()=>el.classList.remove('show'),2500);
+}
+
+// ---- HESAPLAMA ----
+function syncRow(id,field,val){
+  const r=rows.find(r=>r.id===id);if(!r)return;
+  r[field]=val;
+  if(field==='exVat'||field==='cur'){
+    if(r.exVat){r.inVat=((parseFloat(r.exVat)||0)*(1+getKdv())).toFixed(4);const el=document.getElementById('iv-'+id);if(el)el.value=r.inVat;}
+  }
+  if(field==='inVat'){
+    if(r.inVat){r.exVat=((parseFloat(r.inVat)||0)/(1+getKdv())).toFixed(4);const el=document.getElementById('ev-'+id);if(el)el.value=r.exVat;}
+  }
+  recalc();
+}
+
+function recalc(){
+  let totalKg=0,totalExTL=0,totalInTL=0;
+  rows.forEach(r=>{
+    const qty=parseFloat(r.qty)||0;
+    totalKg+=qty;
+    totalExTL+=qty*toTL(r.exVat,r.cur);
+    totalInTL+=qty*toTL(r.inVat,r.cur);
+  });
+  rows.forEach(r=>{
+    const qty=parseFloat(r.qty)||0;
+    const sh=document.getElementById('sh-'+r.id);
+    if(sh)sh.textContent=totalKg>0?fmt2(qty/totalKg*100)+'%':'—';
+    const cost=document.getElementById('cost-'+r.id);
+    if(cost)cost.textContent='₺'+fmt2(qty*toTL(r.inVat,r.cur));
+  });
+  const iscVal=parseFloat(document.getElementById('iscilik-val').value)||0;
+  const iscCur=document.getElementById('iscilik-cur').value;
+  const iscTLperKg=toTL(iscVal,iscCur);
+  const totalIsc=iscTLperKg*totalKg;
+  const kdvTL=totalInTL-totalExTL;
+  const usdKur=getKurs().USD;
+  const perKgTL=totalKg>0?(totalInTL+totalIsc)/totalKg:0;
+  const perKgUsd=usdKur>0?perKgTL/usdKur:0;
+
+  document.getElementById('total-kg-label').textContent='Toplam: '+fmt3(totalKg)+' kg';
+  document.getElementById('m-kg').textContent=fmt3(totalKg)+' kg';
+  document.getElementById('m-ex').textContent='₺'+fmt2(totalExTL);
+  document.getElementById('m-kdv').textContent='₺'+fmt2(kdvTL);
+  document.getElementById('m-in').textContent='₺'+fmt2(totalInTL);
+  document.getElementById('m-iscilik').textContent='₺'+fmt2(totalIsc);
+  document.getElementById('m-per-kg-tl').textContent='₺'+fmt2(perKgTL);
+  document.getElementById('m-per-kg-usd').textContent=fmtUsd(perKgUsd);
+
+  const lbl=document.getElementById('iscilik-tl-label');
+  if(lbl)lbl.textContent=(iscVal&&iscCur!=='TL')?'= ₺'+fmt2(iscTLperKg)+'/kg':'';
+}
+
+function renderTable(){
+  const tbody=document.getElementById('ing-body');
+  tbody.innerHTML='';
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><input type="text" value="${r.name||''}" placeholder="Hammadde adı" onchange="syncRow('${r.id}','name',this.value)"/></td>
+      <td><input type="number" value="${r.qty||''}" placeholder="0.000" step="0.001" min="0" oninput="syncRow('${r.id}','qty',this.value)"/></td>
+      <td><select onchange="syncRow('${r.id}','cur',this.value)">
+        <option value="TL" ${r.cur==='TL'?'selected':''}>₺ TL</option>
+        <option value="USD" ${r.cur==='USD'?'selected':''}>$ USD</option>
+        <option value="EUR" ${r.cur==='EUR'?'selected':''}>€ EUR</option>
+      </select></td>
+      <td><input type="number" id="ev-${r.id}" value="${r.exVat||''}" placeholder="0.0000" step="0.0001" min="0" oninput="syncRow('${r.id}','exVat',this.value)"/></td>
+      <td><input type="number" id="iv-${r.id}" value="${r.inVat||''}" placeholder="0.0000" step="0.0001" min="0" oninput="syncRow('${r.id}','inVat',this.value)"/></td>
+      <td id="cost-${r.id}" style="font-size:12px;color:#888">₺0.00</td>
+      <td style="text-align:center;font-size:12px;color:#888" id="sh-${r.id}">—</td>
+      <td><button class="btn btn-sm btn-danger" onclick="removeRow('${r.id}')">×</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  recalc();
+}
+
+function addRow(){rows.push({id:uid(),name:'',qty:'',cur:'TL',exVat:'',inVat:''});renderTable();}
+function removeRow(id){if(rows.length<=1)return;rows=rows.filter(r=>r.id!==id);renderTable();}
+
+function saveFormula(){
+  const name=document.getElementById('formula-name').value.trim()||('Formül '+(saved.length+1));
+  const kdv=getKdv();const kurs=getKurs();
+  let totalKg=0,totalInTL=0;
+  rows.forEach(r=>{totalKg+=parseFloat(r.qty)||0;totalInTL+=(parseFloat(r.qty)||0)*toTL(r.inVat,r.cur);});
+  const iscVal=parseFloat(document.getElementById('iscilik-val').value)||0;
+  const iscCur=document.getElementById('iscilik-cur').value;
+  const iscTLperKg=toTL(iscVal,iscCur);
+  const perKgTL=totalKg>0?(totalInTL+iscTLperKg*totalKg)/totalKg:0;
+  const perKgUsd=kurs.USD>0?perKgTL/kurs.USD:0;
+  saved.unshift({id:Date.now(),name,kdv,kurs,iscilik:{val:iscVal,cur:iscCur},rows:rows.map(r=>({...r})),totalKg,perKgTL,perKgUsd,date:new Date().toLocaleDateString('tr-TR')});
+  serverSave();renderSaved();
+}
+
+function loadFormula(id){
+  const f=saved.find(f=>f.id===id);if(!f)return;
+  document.getElementById('formula-name').value=f.name;
+  document.getElementById('kdv-rate').value=f.kdv;
+  document.getElementById('kur-usd').value=f.kurs.USD;
+  document.getElementById('kur-eur').value=f.kurs.EUR;
+  document.getElementById('iscilik-val').value=f.iscilik.val;
+  document.getElementById('iscilik-cur').value=f.iscilik.cur;
+  rows=f.rows.map(r=>({...r}));
+  renderTable();
+}
+
+function deleteFormula(id){
+  if(!confirm('Bu formülü silmek istiyor musunuz?'))return;
+  saved=saved.filter(f=>f.id!==id);
+  serverSave();renderSaved();
+}
+
+function renderSaved(){
+  const el=document.getElementById('saved-list');
+  if(!saved.length){el.innerHTML='<div class="empty">Henüz kayıtlı formül yok</div>';return;}
+  el.innerHTML=saved.map(f=>`
+    <div class="saved-item" onclick="loadFormula(${f.id})">
+      <div>
+        <div class="saved-name">${f.name}</div>
+        <div class="saved-meta">${f.date} &nbsp;·&nbsp; ${fmt3(f.totalKg||0)} kg &nbsp;·&nbsp; <b>₺${fmt2(f.perKgTL||0)}/kg</b> &nbsp;·&nbsp; <b style="color:#0c3b6e">$${fmt2(f.perKgUsd||0)}/kg</b> &nbsp;·&nbsp; USD:₺${fmt2(f.kurs?.USD||0)} &nbsp;·&nbsp; EUR:₺${fmt2(f.kurs?.EUR||0)}</div>
+      </div>
+      <div class="saved-actions" onclick="event.stopPropagation()">
+        <button class="btn btn-sm" onclick="loadFormula(${f.id})">Yükle</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteFormula(${f.id})">Sil</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function clearForm(){
+  rows=DEFAULTS.map(n=>({id:uid(),name:n,qty:'',cur:'TL',exVat:'',inVat:''}));
+  document.getElementById('formula-name').value='';
+  document.getElementById('iscilik-val').value='';
+  renderTable();
+}
+
+checkSession();
+</script>
+</body>
+</html>
